@@ -1,0 +1,78 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] -My Online Library</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/book.css" rel="stylesheet" asp-append-version="true" />
+    
+</head>
+<body>
+    <header class="header-outer">
+      
+        <nav class="navbar">
+            
+            <div class="container-fluid">
+               
+               
+                        @if (User?.Identity?.IsAuthenticated ?? false)
+                        {
+                          <div class="btn-group">
+                            <div class="dropdown">
+                              <a  class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+                                   Category
+                                </a>
+                                <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="BooksCategory" asp-action="Action">Action</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="BooksCategory" asp-action="Biography">Biography</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="BooksCategory" asp-action="Children">Children</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="BooksCategory" asp-action="Crime">Crime</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="BooksCategory" asp-action="Fantasy">Fantasy</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                </ul>
+                                </div>
+                            </div>
+                    <a asp-area="" asp-controller="Books" asp-action="All">
+                        Books
+                    </a>
+                        <a asp-area="" asp-controller="Books" asp-action="MyBooks">
+                            My Books
+                        </a>
+                        <a  asp-area="" asp-controller="Books" asp-action="Add" >
+                            Add Books
+                        </a>
+                        
+                        }
+
+                <div></div>
+                <div><partial name="_LoginPartial" /></div>
+                </div>
+             
+        </nav>
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            <form class="search-container" action="@Url.Action("Search", "Books")" method="GET">
+                <i class="fa-search"><img src="~/img/800px-search_icon.svg.png" /></i>
+                <input class="input-search" type="text" name="query" placeholder="Search..." />
+                <button class="visually-hidden" type="submit"></button>
+                <i class="fa-times">x</i>
+            </form>
+        }
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

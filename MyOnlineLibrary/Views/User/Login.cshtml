@@ -1,0 +1,36 @@
+﻿@model LoginViewModel
+@using MyOnlineLibrary.Core.Models;
+@{
+    ViewData["Title"] = "Log in";
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <h2 class="card-title text-center">Log In </h2>
+                <div class="card-body py-md-4">
+                    <form _lpchecked="1" id="account" method="post">
+                        <div class="form-group">
+                            <label hidden="hidden" asp-for="@Model.UserName" class="form-control" autocomplete="username" aria-required="true"></label>
+                            <input class="form-control " autocomplete="username" aria-required="true" placeholder="User Name" asp-for="@Model.UserName" />
+                            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                        </div>  
+                        <div class="form-group">
+                            <label hidden="hidden" asp-for="@Model.Password" class="form-label"></label>
+                            <input class="form-control" type="password" autocomplete="current-password" aria-required="true" placeholder="Password" asp-for="@Model.Password" />
+                            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                        </div>
+                       
+                        <div class="d-flex flex-row align-items-center justify-content-between">
+                            <button id="registerSubmit" type="submit" class="btn btn-primary">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BookViewModel>
+@using MyOnlineLibrary.Core.Models
+
+
+<div class="text-center row">
+    @foreach (var book in Model)
+    {
+        <div class="card my-card" style="width: 60rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@book.ImageUrl" alt="Book Image">
+            <div class="my-body">
+
+                <p class="my-prop-title">@book.Title</p>
+                <p class="my-prop">Author: @book.Author</p>
+                <p class="my-prop">Rating: @book.Rating</p>
+                <p class ="my-prop">Category: @book.Category</p>
+
+                <p class="my-prop-description">Category: @book.Description</p>
+            </div>
+
+           
+        </div>
+    }
+</div>
