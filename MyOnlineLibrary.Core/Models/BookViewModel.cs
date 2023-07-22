@@ -1,4 +1,8 @@
-﻿namespace MyOnlineLibrary.Core.Models
+﻿using Microsoft.AspNetCore.Http;
+using MyOnlineLibrary.Infrastructure.Data.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace MyOnlineLibrary.Core.Models
 {
     public class BookViewModel
     {
@@ -20,6 +24,12 @@
         public decimal Rating { get; set; }
 
         public string? Category { get; set; }
+
+       
+        public List<UploadFiles> UploadFiles { get; set; }
+
+
+
 
 
 

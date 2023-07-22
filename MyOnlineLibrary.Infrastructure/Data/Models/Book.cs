@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace MyOnlineLibrary.Infrastructure.Data.Models
 {
@@ -33,6 +34,7 @@ namespace MyOnlineLibrary.Infrastructure.Data.Models
         [ForeignKey(nameof(CategoryId))]
         public Category? Category { get; set; }
 
+        public ICollection<UploadFiles>? UploadFiles { get; set; }
         public List<LibraryUserBook> Books { get; set; } = new List<LibraryUserBook>();
     }
 }

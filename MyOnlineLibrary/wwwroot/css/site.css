@@ -1,9 +1,14 @@
 html {
   font-size: 14px;
+  
+}
+
+body {
+    background: none;
 }
 
 @media (min-width: 768px) {
-  html {
+    html {
     font-size: 16px;
   }
 }
@@ -128,9 +133,7 @@ label {
     font-family: "Montserrat";
 }
 
-body {
-    background-color: #D3CFCE;
-}
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -321,10 +324,7 @@ h1 {
 
 
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
+
 
 .heder-index{
     height:800px;
@@ -344,7 +344,7 @@ body {
     font-size: 150px;
 }
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
-body {
+html {
     font: 100% Roboto, sans-serif;
     background: url('../img/alexander-grey-emp4sypj9x0-unsplash (3).jpg')
     50% 50% no-repeat;

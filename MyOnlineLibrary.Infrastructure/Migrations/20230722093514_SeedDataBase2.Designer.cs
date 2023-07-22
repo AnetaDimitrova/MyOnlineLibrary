@@ -12,8 +12,8 @@ using MyOnlineLibrary.Infrastructure.Data;
 namespace MyOnlineLibrary.Data.Migrations
 {
     [DbContext(typeof(MyOnlineLibraryDbContext))]
-    [Migration("20230717182903_addPaginationModel")]
-    partial class addPaginationModel
+    [Migration("20230722093514_SeedDataBase2")]
+    partial class SeedDataBase2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -440,6 +440,32 @@ namespace MyOnlineLibrary.Data.Migrations
                     b.ToTable("LibraryUserBook");
                 });
 
+            modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.UploadFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Files");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -521,9 +547,22 @@ namespace MyOnlineLibrary.Data.Migrations
                     b.Navigation("LibraryUser");
                 });
 
+            modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.UploadFiles", b =>
+                {
+                    b.HasOne("MyOnlineLibrary.Infrastructure.Data.Models.Book", "Book")
+                        .WithMany("UploadFiles")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
             modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.Book", b =>
                 {
                     b.Navigation("Books");
+
+                    b.Navigation("UploadFiles");
                 });
 
             modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.LibraryUser", b =>

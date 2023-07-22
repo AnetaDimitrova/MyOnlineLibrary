@@ -27,6 +27,8 @@ builder.Services.AddDefaultIdentity<LibraryUser>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBooksService, BooksService>();
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

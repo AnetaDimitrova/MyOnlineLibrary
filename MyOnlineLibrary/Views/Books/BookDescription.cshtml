@@ -12,9 +12,22 @@
 
                 <p class="my-prop-title">@book.Title</p>
                 <p class="my-prop">Author: @book.Author</p>
+               
                 <p class="my-prop">Rating: @book.Rating</p>
                 <p class ="my-prop">Category: @book.Category</p>
+                @if (book.UploadFiles != null && book.UploadFiles.Any())
+                {
+                    
+                    <ul>
 
+                        @foreach (var files in book.UploadFiles)
+                        {
+                            <li>
+                                <a asp-action="DownloadFile" asp-controller="Books" asp-route-Id="@files.Id">Download</a>
+                            </li>
+                        }
+                    </ul>
+                }
                 <p class="my-prop-description">Category: @book.Description</p>
             </div>
 

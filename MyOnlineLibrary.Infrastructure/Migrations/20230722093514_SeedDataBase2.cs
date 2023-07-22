@@ -4,7 +4,7 @@
 
 namespace MyOnlineLibrary.Data.Migrations
 {
-    public partial class addPaginationModel : Migration
+    public partial class SeedDataBase2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,6 +13,7 @@ namespace MyOnlineLibrary.Data.Migrations
                 columns: new[] { "Id", "Author", "CategoryId", "Description", "ImageUrl", "Rating", "Title" },
                 values: new object[,]
                 {
+                    { 5, "Oli Hazzard", 1, "Lorem Ipsum consists of a single, 60,000-word sentence. An epistolary fiction to an unidentified email recipient, the novel is modelled after the Japanese prose genre of the zuihitsu, an unfolding sentence in which resolution and closure are endlessly deferred. Our relationships with time and the environment have been radically altered by our awareness of global warming and the experience of being on the internet, and this shape-shifting novel is written out of and towards this moment of crisis in the ordinary, in which the experience of attention has changed entirely. Playful, disruptive and digressive, it reflects the associative movements of our minds. Lorem Ipsum is also an intimate, singular exploration of being a parent, a child, dreams, work, fantasies, happiness, memory, protest, repetition, intergenerational conflict, and the forms of community which appear or disappear based on how we conceive of 'shared time'. It is a book about the foundations upon which we build our lives: in John Ashbery’s words: ‘a chronicle of its own creation’.", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1618913266i/57801373.jpg", 3.4m, "Lorem Ipsum" },
                     { 8, "Eddie Jaku", 2, "Eddie Jaku always considered himself a German first, a Jew second. He was proud of his country. But all of that changed in November 1938, when he was beaten, arrested and taken to a concentration camp.Over the next seven years, Eddie faced unimaginable horrors every day, first in Buchenwald, then in Auschwitz, then on a Nazi death march. He lost family, friends, his country. Because he survived, Eddie made the vow to smile every day. He pays tribute to those who were lost by telling his story, sharing his wisdom and living his best possible life. He now believes he is the 'happiest man on earth'. Published as Eddie turns 100, this is a powerful, heartbreaking and ultimately hopeful memoir of how happiness can be found even in the darkest of times.", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1595373758i/53239311.jpg", 4.64m, "The Happiest Man on Earth" },
                     { 9, "Des Linden,Bonnie D. Ford", 2, "Featuring both the story of an historic, unforgettable win and insight into the life of an indelible champion, Choosing to Run is a truly inspirational memoir from Boston Marathon winner and Olympian Des Linden, sharing her personal story and what motivates her to keep showing up. When Des woke up on April 16, 2018, the morning of the Boston Marathon, it was 39 degrees and raining, with high, gusty winds. The weather didn’t bother her. In fact, she thought it might be a blessing. She was far from peak form—recovering from illness and questioning her running future—and didn’t expect much of herself that day. But as she ticked off mile after mile in the brutal conditions, passing familiar landmarks on the course she knew by heart, something shifted. Opportunity unexpectedly presented itself. Des tapped into her inner strength and remembered all of the reasons she loved to race. Coming off Heartbreak Hill at Mile 22, Des took the lead and never relinquished it, becoming the 2018 Boston Marathon champion and the first American woman to win the race in thirty-three years. Her career has always been defined by tenacity and an independent spirit, stretching back to her first competitive race in San Diego, when she beat better-outfitted, more experienced kids. Des was a two-time All-American at Arizona State University, and as her collegiate years wound down, she decided she wasn’t done with the sport. Des gambled on herself and moved to Michigan to give professional running a try. As she rose through the elite ranks, she became increasingly determined to do things her way in an industry often bound by the status quo. In her first book, readers will learn the story behind that the way Des trains, the way she thinks, her relationships with other great runners of her generation, and how much she values her family and friends. They’ll read about her deep connection to the most famous marathon in the world, her two very different Olympic experiences, and how she defined new goals and set a world record at the 50-kilometer distance. Most of all, they’ll learn what makes her get up and run every day.", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1673265751i/61420096.jpg", 4.41m, "Choosing to Run: A Memoir" },
                     { 10, "Will Wight", 1, "Years ago, Lindon left his home as a powerless Unsouled. Now, he goes to war with the most powerful beings in the world over the future of Cradle itself. The Weeping Dragon has a grudge to settle, and Lindon intends to take out the Dreadgod with his friends by his side. But rival Monarchs know his plans, and they won’t let things end so easily. If Lindon does win, he will ascend to the heavens. But he may not find a safe haven there either. In the worlds above, Suriel and Ozriel face off against the Mad King to determine the new shape of the cosmos. The victor will decide the fate of countless universes. Whether he wins or dies, Lindon will soon leave this life behind. The time has come to say goodbye to Cradle.", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1685927627i/173338910.jpg", 4.7m, "Waybound" },
@@ -28,55 +29,7 @@ namespace MyOnlineLibrary.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 8);
 
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 9);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 10);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 11);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 12);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 13);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 14);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 15);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 16);
-
-            migrationBuilder.DeleteData(
-                table: "Books",
-                keyColumn: "Id",
-                keyValue: 17);
         }
     }
 }

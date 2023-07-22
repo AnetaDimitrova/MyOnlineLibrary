@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyOnlineLibrary.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using MyOnlineLibrary.Infrastructure.Data;
 namespace MyOnlineLibrary.Data.Migrations
 {
     [DbContext(typeof(MyOnlineLibraryDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230721145235_UploaldFiles3")]
+    partial class UploaldFiles3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -453,7 +455,7 @@ namespace MyOnlineLibrary.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("FileName")
+                    b.Property<string>("FaleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -548,7 +550,7 @@ namespace MyOnlineLibrary.Data.Migrations
             modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.UploadFiles", b =>
                 {
                     b.HasOne("MyOnlineLibrary.Infrastructure.Data.Models.Book", "Book")
-                        .WithMany("UploadFiles")
+                        .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -559,8 +561,6 @@ namespace MyOnlineLibrary.Data.Migrations
             modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.Book", b =>
                 {
                     b.Navigation("Books");
-
-                    b.Navigation("UploadFiles");
                 });
 
             modelBuilder.Entity("MyOnlineLibrary.Infrastructure.Data.Models.LibraryUser", b =>

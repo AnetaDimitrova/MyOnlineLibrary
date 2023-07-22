@@ -1,4 +1,5 @@
-﻿using MyOnlineLibrary.Infrastructure.Data.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MyOnlineLibrary.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,8 @@ namespace MyOnlineLibrary.Core.Models
 {
     public class AddBookViewModel
     {
+
+        public int Id { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 10)]
         public string Title { get; set; } = null!;
@@ -33,6 +36,13 @@ namespace MyOnlineLibrary.Core.Models
         [Required]
         public int CategoryId { get; set; }
 
+        
+        public List<IFormFile>? UploadFiles { get; set; }
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
+
+       
+
+
+
     }
 }

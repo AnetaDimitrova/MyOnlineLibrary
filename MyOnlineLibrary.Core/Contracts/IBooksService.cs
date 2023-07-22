@@ -1,4 +1,5 @@
-﻿using MyOnlineLibrary.Core.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MyOnlineLibrary.Core.Models;
 using MyOnlineLibrary.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace MyOnlineLibrary.Core.Contracts
     public interface IBooksService
     {
         Task<IEnumerable<BookViewModel>> GetAllAsync();
+
+        Task<IEnumerable<BookViewModel>> GetAlltoDownloadAsync();
         Task<IEnumerable<Category>> GetCategoryAsync();
         Task AddBookAsync(AddBookViewModel model);
 

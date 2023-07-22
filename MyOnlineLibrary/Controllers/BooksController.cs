@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyOnlineLibrary.Core.Contracts;
 using MyOnlineLibrary.Core.Models;
+using MyOnlineLibrary.Infrastructure.Data;
 using MyOnlineLibrary.Infrastructure.Data.Models;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace MyOnlineLibrary.Controllers
@@ -10,11 +13,20 @@ namespace MyOnlineLibrary.Controllers
     {
         private readonly IBooksService bookService;
 
+        private readonly IWebHostEnvironment _environment;
+        private readonly MyOnlineLibraryDbContext context;
+
+
         public IEnumerable<Category> Categories { get; private set; }
 
-        public BooksController(IBooksService _bookService)
+        public BooksController(IBooksService _bookService, IWebHostEnvironment environment
+            , MyOnlineLibraryDbContext _cotext)
         {
             bookService = _bookService;
+            _environment= environment;
+            context = _cotext;
+
+            
         }
 
         [HttpGet]
@@ -39,7 +51,7 @@ namespace MyOnlineLibrary.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddBookViewModel model)
+        public async Task<IActionResult> Add(AddBookViewModel model )
         {
             if (!ModelState.IsValid)
             {
@@ -49,6 +61,13 @@ namespace MyOnlineLibrary.Controllers
             try
             {
                 await bookService.AddBookAsync(model);
+               
+                     
+                    await context.SaveChangesAsync();
+
+
+                
+
 
                 return RedirectToAction(nameof(All));
             }
@@ -116,9 +135,24 @@ namespace MyOnlineLibrary.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchDescription(int id)
         {
-            var result = await bookService.GetAllAsync();
+            var result = await bookService.GetAlltoDownloadAsync();
             var model = result.Where(b => b.Id == id);
             return View("BookDescription", model);
         }
+
+        public IActionResult DownloadFile(int id)
+        {
+            var file = context.Files.Find(id);
+
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            // Return the attachment file to the client for download.
+            return File(file.Data, "application/octet-stream", file.FileName);
+        }
     }
 }
+
+
