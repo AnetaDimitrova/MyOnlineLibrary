@@ -149,7 +149,6 @@ namespace MyOnlineLibrary.Controllers
                 return NotFound();
             }
 
-            // Return the attachment file to the client for download.
             return File(file.Data, "application/octet-stream", file.FileName);
         }
     }
