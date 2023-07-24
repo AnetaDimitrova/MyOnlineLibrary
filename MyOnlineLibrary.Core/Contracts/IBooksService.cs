@@ -12,6 +12,7 @@ namespace MyOnlineLibrary.Core.Contracts
     public interface IBooksService
     {
         Task<IEnumerable<BookViewModel>> GetAllAsync();
+        Task<Book> GetBookByIdAsync(int id);
 
         Task<IEnumerable<BookViewModel>> GetAlltoDownloadAsync();
         Task<IEnumerable<Category>> GetCategoryAsync();
@@ -21,5 +22,7 @@ namespace MyOnlineLibrary.Core.Contracts
         Task<IEnumerable<BookViewModel>> GetMyBookAsync(string userId);
 
         Task RemoveBookFromCollectionAsync(int bookId, string userId);
+
+        void Delete (int id);
     }
 }

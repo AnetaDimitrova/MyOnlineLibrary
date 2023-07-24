@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Options;
 using MyOnlineLibrary.Core.Contracts;
 using MyOnlineLibrary.Core.Services;
 using MyOnlineLibrary.Infrastructure.Data;
+using MyOnlineLibrary.Infrastructure.Data.Common;
 using MyOnlineLibrary.Infrastructure.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,7 @@ builder.Services.AddDefaultIdentity<LibraryUser>(options =>
     .AddEntityFrameworkStores<MyOnlineLibraryDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBooksService, BooksService>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 
 

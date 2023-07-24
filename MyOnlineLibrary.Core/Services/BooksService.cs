@@ -102,9 +102,14 @@ namespace MyOnlineLibrary.Core.Services
         await context.SaveChangesAsync();
     }
 
+        public void Delete(int id)
+        {
+            var book = context.Books.FirstOrDefault(u => u.Id == id);
+             context.Books.Remove(book);
+            context.SaveChanges();
+        }
 
-
-    public async Task<IEnumerable<BookViewModel>> GetAllAsync()
+        public async Task<IEnumerable<BookViewModel>> GetAllAsync()
     {
         var entities = await context.Books
             .Include(b => b.Category)
@@ -149,6 +154,12 @@ namespace MyOnlineLibrary.Core.Services
 
 
                 }); ;
+        }
+
+        public async Task<Book> GetBookByIdAsync(int id)
+        {
+            return await context.Books.FindAsync(id);
+            
         }
 
         public async Task<IEnumerable<Category>> GetCategoryAsync()
@@ -204,5 +215,7 @@ namespace MyOnlineLibrary.Core.Services
                 await context.SaveChangesAsync();
             }
         }
+
+        
     }
 }

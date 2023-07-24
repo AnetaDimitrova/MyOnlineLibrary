@@ -37,6 +37,11 @@
                         <form class="input-group-sm" asp-controller="Books" asp-action="AddToCollection" asp-route-bookId="@book.Id">
                             <input type="submit" value="Add to Collection" class="fs-6 btn btn-success mb-3 p-2" />
                         </form>
+
+                        <form class="input-group-sm" asp-controller="Books" asp-action="DeleteBook" >
+                            <input type="hidden" name="id" value="@book.Id" />
+                            <input onclick="ConfirmDelete()" type="submit" id="del" value="Delete" class="fs-6 btn btn-success mb-3 p-2" />
+                        </form>
                     </div>
                 </div>
             </div>

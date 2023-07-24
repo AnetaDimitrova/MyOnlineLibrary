@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MyOnlineLibrary.Core.Contracts;
 using MyOnlineLibrary.Core.Models;
 using MyOnlineLibrary.Infrastructure.Data;
+using MyOnlineLibrary.Infrastructure.Data.Common;
 using MyOnlineLibrary.Infrastructure.Data.Models;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -17,16 +18,19 @@ namespace MyOnlineLibrary.Controllers
 
         private readonly IWebHostEnvironment _environment;
         private readonly MyOnlineLibraryDbContext context;
+        private readonly IRepository repository;
 
 
         public IEnumerable<Category> Categories { get; private set; }
 
         public BooksController(IBooksService _bookService, IWebHostEnvironment environment
-            , MyOnlineLibraryDbContext _cotext)
+            , MyOnlineLibraryDbContext _cotext,
+            IRepository _repository)
         {
             bookService = _bookService;
             _environment = environment;
             context = _cotext;
+            repository = _repository;
 
 
         }
@@ -193,6 +197,15 @@ namespace MyOnlineLibrary.Controllers
          
 
             return RedirectToAction("SearchDescription", new { id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>DeleteBook(int Id)
+        {
+             bookService.Delete(Id);
+
+
+            return RedirectToAction("All"); ;
         }
 
     }
