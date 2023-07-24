@@ -13,7 +13,16 @@ body {
   }
 }
 
-html {
+
+.form-control {
+    display: revert;
+    width: 30%;
+    font-family: "Montserrat";
+    border:dashed;
+}
+
+
+  html{
   position: relative;
   min-height: 100%;
 }
@@ -32,6 +41,9 @@ html {
     z-index: 1;
     margin-bottom:0px;
 }
+
+
+
 
 
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
@@ -542,14 +554,16 @@ a:hover, a:active {
 
 
 .my-prop {
+   
     text-align: center;
     color: black;
     font-family: "Montserrat";
     font-size: 20px;
 }
 .my-prop-title {
+   
     margin-top: -290px;
-    margin-left:10px;
+    margin-left: 10px;
     text-align: center;
     color: black;
     font-size: 30px;

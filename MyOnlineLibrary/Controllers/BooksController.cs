@@ -7,6 +7,8 @@ using MyOnlineLibrary.Infrastructure.Data.Models;
 using System.Collections.Generic;
 using System.Security.Claims;
 
+
+
 namespace MyOnlineLibrary.Controllers
 {
     public class BooksController : Controller
@@ -23,10 +25,10 @@ namespace MyOnlineLibrary.Controllers
             , MyOnlineLibraryDbContext _cotext)
         {
             bookService = _bookService;
-            _environment= environment;
+            _environment = environment;
             context = _cotext;
 
-            
+
         }
 
         [HttpGet]
@@ -51,7 +53,7 @@ namespace MyOnlineLibrary.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddBookViewModel model )
+        public async Task<IActionResult> Add(AddBookViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -61,12 +63,12 @@ namespace MyOnlineLibrary.Controllers
             try
             {
                 await bookService.AddBookAsync(model);
-               
-                     
-                    await context.SaveChangesAsync();
 
 
-                
+                await context.SaveChangesAsync();
+
+
+
 
 
                 return RedirectToAction(nameof(All));
@@ -151,7 +153,52 @@ namespace MyOnlineLibrary.Controllers
 
             return File(file.Data, "application/octet-stream", file.FileName);
         }
+
+
+        public async Task<IActionResult> UploadFile(int id, IFormFile[] fileUpload)
+        {
+            var book = await context.Books
+                .Include(b => b.UploadFiles)
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            // Process and save the attachments, if any
+            if (fileUpload != null && fileUpload.Length > 0)
+            {
+                foreach (var file in fileUpload)
+                {
+                    if (file.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(memoryStream);
+                            var attachment = new UploadFiles
+                            {
+                                Data = memoryStream.ToArray(),
+                                BookId = book.Id,
+                                FileName = file.FileName
+                            };
+                            book.UploadFiles.Add(attachment);
+                        }
+                    }
+                }
+
+                await context.SaveChangesAsync();
+            }
+
+         
+
+            return RedirectToAction("SearchDescription", new { id });
+        }
+
     }
+  
 }
+
+
 
 

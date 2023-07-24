@@ -25,8 +25,8 @@ namespace MyOnlineLibrary.Core.Models
 
         public string? Category { get; set; }
 
-       
-        public List<UploadFiles> UploadFiles { get; set; }
+        public List<UploadFiles>? UploadFiles { get; set; }
+
 
 
 

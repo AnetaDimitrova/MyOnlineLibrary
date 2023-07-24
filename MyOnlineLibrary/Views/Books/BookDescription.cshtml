@@ -22,11 +22,23 @@
 
                         @foreach (var files in book.UploadFiles)
                         {
-                            <li>
+                            
                                 <a asp-action="DownloadFile" asp-controller="Books" asp-route-Id="@files.Id">Download</a>
-                            </li>
+                            
                         }
                     </ul>
+                }
+                else
+                {
+                    @using (Html.BeginForm("UploadFile", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+
+                       <input type="hidden" name="id" value="@book.Id" />
+                        <input type="file" name="fileUpload" id="fileUpload" multiple class="form-control"  />
+                            <br />
+                            <input type="submit"  value=" Save Changes" class="btn btn-primary" />
+                       
+                    }
                 }
                 <p class="my-prop-description">Category: @book.Description</p>
             </div>
