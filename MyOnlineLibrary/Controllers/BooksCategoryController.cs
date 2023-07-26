@@ -17,58 +17,15 @@ namespace MyOnlineLibrary.Controllers
         }
 
 
-        public async Task<IActionResult> Fantasy()
+        public async Task<IActionResult> Category( int Id)
         {
-            var result = await bookService.GetAllAsync();
-           
-            var model = result.Where(c => c.Category=="Fantasy");
-
+            var books = await bookService.GetAllAsync();
+            var model = books.Where(b => b.CategoryId == Id);
             
 
-            return View(model);
-        }
-        public async Task<IActionResult> Action()
-        {
-            var result = await bookService.GetAllAsync();
-
-            var model = result.Where(c => c.Category == "Action");
-
-
 
             return View(model);
         }
-
-        public async Task<IActionResult> Biography()
-        {
-            var result = await bookService.GetAllAsync();
-
-            var model = result.Where(c => c.Category == "Biography");
-
-
-
-            return View(model);
-        }
-
-        public async Task<IActionResult> Children()
-        {
-            var result = await bookService.GetAllAsync();
-
-            var model = result.Where(c => c.Category == "Children");
-
-
-
-            return View(model);
-        }
-
-        public async Task<IActionResult> Crime()
-        {
-            var result = await bookService.GetAllAsync();
-
-            var model = result.Where(c => c.Category == "Crime");
-
-
-
-            return View(model);
-        }
+       
     }
 }

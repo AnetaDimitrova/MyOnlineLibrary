@@ -36,7 +36,7 @@ namespace MyOnlineLibrary.Core.Models
         [Required]
         public int CategoryId { get; set; }
 
-        
+       
         public List<IFormFile>? UploadFiles { get; set; }
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 

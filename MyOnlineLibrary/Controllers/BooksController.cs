@@ -39,6 +39,7 @@ namespace MyOnlineLibrary.Controllers
         public async Task<IActionResult> All()
         {
             var model = await bookService.GetAllAsync();
+           
             return View(model);
         }
 
@@ -194,22 +195,87 @@ namespace MyOnlineLibrary.Controllers
                 await context.SaveChangesAsync();
             }
 
-         
+
 
             return RedirectToAction("SearchDescription", new { id });
         }
 
         [HttpPost]
-        public async Task<IActionResult>DeleteBook(int Id)
+        public async Task<IActionResult> DeleteBook(int Id)
         {
-             bookService.Delete(Id);
+            bookService.Delete(Id);
 
 
             return RedirectToAction("All"); ;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var books = await bookService.GetAllAsync();
+            var book = books.FirstOrDefault(b => b.Id == Id);
+            var cat = await bookService.GetCategoryAsync();
+
+
+            
+
+            var model = new AddBookViewModel()
+            {
+                Id = book.Id,
+                Author = book.Author,
+                Title = book.Title,
+                ImageUrl = book.ImageUrl,
+                Rating = book.Rating,
+                Categories = cat,
+                Description = book.Description,
+                
+                CategoryId = book.CategoryId,
+            };
+
+
+
+
+
+
+            return (model == null) ? NotFound() : View(model);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult>  Edit(AddBookViewModel model, int Id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                await bookService.EditBookAsync(model);
+
+
+                await context.SaveChangesAsync();
+
+
+
+
+
+                return RedirectToAction("SearchDescription", new { Id });
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Something went wrong");
+
+                return View(model);
+            }
+
+        }
     }
-  
+
+
+
+
 }
 
 

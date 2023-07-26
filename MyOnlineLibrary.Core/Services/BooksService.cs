@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyOnlineLibrary.Core.Contracts;
 using MyOnlineLibrary.Core.Models;
@@ -67,8 +68,52 @@ namespace MyOnlineLibrary.Core.Services
 
         }
 
+        public async Task EditBookAsync(AddBookViewModel model)
+        {
 
-    public async Task AddBookToCollectionAsync(int bookId, string userId)
+            var book = new Book
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Author = model.Author,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Rating = model.Rating,
+                CategoryId = model.CategoryId
+                
+            };
+
+            context.Entry(book).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+
+
+            if (model.UploadFiles != null && model.UploadFiles.Count > 0)
+            {
+                foreach (var file in model.UploadFiles)
+                {
+                    if (file.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            file.CopyTo(memoryStream);
+                            var addFile = new UploadFiles
+                            {
+                                Data = memoryStream.ToArray(),
+                                BookId = book.Id,
+                                FileName = file.FileName,
+
+
+
+                            };
+                            context.Add(addFile);
+                        }
+                    }
+                }
+                context.SaveChanges();
+            }
+
+        }
+        public async Task AddBookToCollectionAsync(int bookId, string userId)
     {
         var user = await context.Users
             .Where(u => u.Id == userId)
@@ -101,7 +146,7 @@ namespace MyOnlineLibrary.Core.Services
 
         await context.SaveChangesAsync();
     }
-
+        
         public void Delete(int id)
         {
             var book = context.Books.FirstOrDefault(u => u.Id == id);
@@ -115,6 +160,8 @@ namespace MyOnlineLibrary.Core.Services
             .Include(b => b.Category)
             .ToListAsync();
 
+           
+
         return entities
             .Select(b => new BookViewModel()
             {
@@ -125,8 +172,9 @@ namespace MyOnlineLibrary.Core.Services
                 ImageUrl = b.ImageUrl,
                 Rating = b.Rating,
                 Title = b.Title,
+                CategoryId = b.Category.Id,
                
-               
+              
 
 
             });
@@ -158,7 +206,7 @@ namespace MyOnlineLibrary.Core.Services
 
         public async Task<Book> GetBookByIdAsync(int id)
         {
-            return await context.Books.FindAsync(id);
+            return await context.Books.FirstOrDefaultAsync(b => b.Id == id);
             
         }
 

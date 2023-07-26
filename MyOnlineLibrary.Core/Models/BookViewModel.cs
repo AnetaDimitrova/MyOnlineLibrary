@@ -23,13 +23,13 @@ namespace MyOnlineLibrary.Core.Models
 
         public decimal Rating { get; set; }
 
+       
+        public int CategoryId { get; set; }
         public string? Category { get; set; }
 
         public List<UploadFiles>? UploadFiles { get; set; }
 
-
-
-
+        public IEnumerable<Category> Categories { get; set; } = new List<Category>();
 
 
 

@@ -19,11 +19,14 @@
                 {
                     
                     <ul>
+                        Download:
 
                         @foreach (var files in book.UploadFiles)
                         {
                             
-                                <a asp-action="DownloadFile" asp-controller="Books" asp-route-Id="@files.Id">Download</a>
+                                <a asp-action="DownloadFile" asp-controller="Books" asp-route-Id="@files.Id">@files.FileName
+                                
+                                </a>
                             
                         }
                     </ul>
@@ -40,6 +43,10 @@
                        
                     }
                 }
+
+                <a asp-action="Edit" asp-controller="Books" asp-route-Id="@book.Id">Edit</a>
+                            
+                
                 <p class="my-prop-description">Category: @book.Description</p>
             </div>
 

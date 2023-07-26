@@ -22,6 +22,7 @@ namespace MyOnlineLibrary.Core.Contracts
         Task<IEnumerable<BookViewModel>> GetMyBookAsync(string userId);
 
         Task RemoveBookFromCollectionAsync(int bookId, string userId);
+        Task EditBookAsync(AddBookViewModel model);
 
         void Delete (int id);
     }
